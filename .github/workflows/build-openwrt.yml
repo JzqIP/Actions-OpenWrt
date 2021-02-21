@@ -188,6 +188,16 @@ jobs:
     - name: 编译信息
       run: |
         cd openwrt
+        DEVICE="$(awk -F '[="]+' '/TARGET_BOARD/{print $2}' .config)"
+        SUBTARGET="$(awk -F '[="]+' '/TARGET_SUBTARGET/{print $2}' .config)"
+        if [ "$DEVICE" == "x86" ]; then
+         echo "NAME1=x86-${SUBTARGET}" >> $GITHUB_ENV
+        elif [ "${{matrix.target}}" == "Lede_phicomm_n1" -o "${{matrix.target}}" == "Project_phicomm_n1" ];then
+         echo "NAME1=n1,Vplus,Beikeyun,L1Pro,S9xxx" >> $GITHUB_ENV
+        elif [ "$DEVICE" != "x86" ]; then
+         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > NAME1
+         [ -s NAME1 ] && echo "NAME1=$(cat NAME1)" >> $GITHUB_ENV
+        fi
         if [[ ${{matrix.target}} != "openwrt" ]]; then
           if [[ "${REGULAR_UPDATE}" == "true" ]]; then
             source common/upgrade.sh && Diy_Part2
@@ -205,7 +215,7 @@ jobs:
       with:
         SCKEY: ${{ secrets.SCKEY }}
         text: 主人"${{ env.WXFB_MESSAGE }}"编译开始啦
-        desp: 主人您要编译的["${{ env.WXFB_MESSAGE }}"]固件正在努力耕耘中,请耐心等待......发布地址：${{ env.GITHUB_RELEASE }}/releases
+        desp: 主人您要编译的["${{ env.WXFB_MESSAGE }}"]固件正在努力耕耘中,请耐心等待......${DEVICE}，$DEVICE
     
     - name: 开始编译固件
       id: compile
