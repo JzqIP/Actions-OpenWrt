@@ -26,13 +26,13 @@ rm -rf ./*/*/{LICENSE,README,README.md}
 
 # LEDE源码通用diy1.sh文件（除了openwrt机型文件夹）
 
-Diy_lede() {
+Diy_lean() {
 echo "LEAN源码自定义1"
 }
 
 # LEAN源码通用diy2.sh文件（openwrt机型文件夹也使用）
 
-Diy_lede2() {
+Diy_lean2() {
 echo "LEDE源码自定义2"
 }
 
