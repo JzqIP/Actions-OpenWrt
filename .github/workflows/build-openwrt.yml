@@ -9,7 +9,7 @@ name: 编译OpenWrt固件
 on:
   workflow_dispatch:
     inputs:
-      #ssh:
+      ssh:
         description: 'SSH远程连接'
         required: false
         default: 'ssh-actions'
