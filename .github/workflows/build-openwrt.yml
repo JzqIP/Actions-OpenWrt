@@ -123,7 +123,7 @@ jobs:
           source common/common.sh && Diy_lean2
           echo "NAME2=Lean-" >> $GITHUB_ENV
           echo "Source=Lean" >> $GITHUB_ENV
-          echo "ZUOZHE=lean" >> $GITHUB_ENV
+          echo "ZUOZHE=大雕" >> $GITHUB_ENV
         elif [ "${REPO_URL}" == "https://github.com/Lienol/openwrt" ]; then
           source common/common.sh && Diy_lienol2
           echo "NAME2=Lienol-" >> $GITHUB_ENV
@@ -155,7 +155,6 @@ jobs:
             echo "Compile_Date=$(date +%Y%m%d-%H%M)" > $GITHUB_WORKSPACE/Openwrt.info
             source common/upgrade.sh && Diy_Part1
           fi
-        fi
 
     - name: 预下载dll
       id: package
