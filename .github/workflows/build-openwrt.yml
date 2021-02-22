@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       ssh:
-        description: '点击绿色按钮前把“ssh-actions”改成ssh可以开启SSH远程'
+        description: '点击绿色按钮启动编译之前把"ssh-actions"改成"ssh"可以开启SSH远程连接服务器修改插件配置功能'
         required: false
         default: 'ssh-actions'
 
