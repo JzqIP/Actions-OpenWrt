@@ -119,7 +119,7 @@ jobs:
         ./scripts/feeds install -a && ./scripts/feeds install -a
         source common/common.sh && Diy_all2
         if [ "${REPO_URL}" == "https://github.com/coolsnowwolf/lede" ]; then
-          source common/common.sh && Diy_Lean2
+          source common/common.sh && Diy_Lede2
           echo "NAME2=Lean-" >> $GITHUB_ENV
           echo "Source=Lean" >> $GITHUB_ENV
           echo "ZUOZHE=lean" >> $GITHUB_ENV
