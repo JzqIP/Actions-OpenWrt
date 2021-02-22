@@ -188,13 +188,17 @@ jobs:
     - name: 编译信息
       run: |
         cd openwrt
-        echo "DEVICE=$(egrep -o "CONFIG_TARGET_.*_.*=y" .config | sed -r 's/CONFIG_TARGET_(.*_.*)=y/\1/')" >> $GITHUB_ENV
-        if [ "${DEVICE}" == "x86_64" ]; then
-         echo "NAME1=x86-64" >> $GITHUB_ENV
-        elif [ "${{matrix.target}}" == "Lede_phicomm_n1" -o "${{matrix.target}}" == "Project_phicomm_n1" ];then
-         echo "NAME1=n1,Vplus,Beikeyun,L1Pro,S9xxx" >> $GITHUB_ENV
+        echo "$(awk -F '[="]+' '/TARGET_BOARD/{print $2}' .config)" > DEVICE
+        [ -s DEVICE ] && echo "DEVICE=$(cat DEVICE)" >> $GITHUB_ENV
+        echo "$(awk -F '[="]+' '/TARGET_SUBTARGET/{print $2}' .config)" > SUBTARGET
+        [ -s SUBTARGET ] && echo "SUBTARGET=$(cat SUBTARGET)" >> $GITHUB_ENV
+        if [[ "${DEVICE}" == "x86" ]]; then
+          echo "NAME1=x86-${SUBTARGET}" >> $GITHUB_ENV
+        elif [[ ${{matrix.target}} =~ (Lede_phicomm_n1|Project_phicomm_n1) ]]; then
+          echo "NAME1=n1,Vplus,Beikeyun,L1Pro,S9xxx" >> $GITHUB_ENV
         else
-         echo "NAME1=$(grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/')" >> $GITHUB_ENV
+          grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > NAME2
+          [ -s NAME2 ] && echo "NAME1=$(cat NAME2)" >> $GITHUB_ENV
         fi
         if [[ ${{matrix.target}} != "openwrt" ]]; then
           if [[ "${REGULAR_UPDATE}" == "true" ]]; then
