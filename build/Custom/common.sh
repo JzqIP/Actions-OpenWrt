@@ -29,7 +29,7 @@ rm -rf ./*/*/{LICENSE,README,README.md}
 Diy_lean() {
 echo "LEAN源码自定义1"
 }
-https://github.com/281677160/openwrt-package/tree/master/luci-app-autoupdate
+
 # LEAN源码通用diy2.sh文件（openwrt机型文件夹也使用）
 
 Diy_lean2() {
