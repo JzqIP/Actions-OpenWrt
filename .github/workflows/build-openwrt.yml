@@ -13,14 +13,6 @@ on:
         description: 'SSH远程'
         required: false
         default: 'ssh-actions'
-      wxtz:
-        description: '微信通知'
-        required: false
-        default: 'wxtz-actions'
-      release:
-        description: '发布固件'
-        required: false
-        default: 'release-actions'
 
 #定时触发开始编译(把下面两个#去掉开启,时间设置请看定时编译说明)
 #  schedule:
@@ -213,7 +205,7 @@ jobs:
     
     - name: 微信通知
       uses: emon100/Action-Serverchan@v2
-      if: env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
+      if: env.SERVERCHAN_SCKEY == 'true'
       with:
         SCKEY: ${{ secrets.SCKEY }}
         text: 主人"${{ env.WXFB_MESSAGE }}"编译开始啦
@@ -314,7 +306,7 @@ jobs:
         echo "::warning file=WeTransfer（${{matrix.target}}）::$(cat wetransfer.log | grep https)"
     
     - name: 提取发布用的「奶牛快传」跟「WeTransfer」的链接
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' || (github.event.inputs.release == 'release' && github.event.inputs.release  != 'false')
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
@@ -325,7 +317,7 @@ jobs:
     
     - name: 自动发布固件
       uses: softprops/action-gh-release@v1
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' || (github.event.inputs.release == 'release' && github.event.inputs.release  != 'false')
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
@@ -358,7 +350,7 @@ jobs:
     
     - name: 微信通知
       uses: emon100/Action-Serverchan@v2
-      if: steps.organizer.outputs.status == 'success' && env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
+      if: steps.organizer.outputs.status == 'success' && env.SERVERCHAN_SCKEY == 'true'
       with:
         SCKEY: ${{ secrets.SCKEY }}
         text: 恭喜主人${{ env.WXFB_MESSAGE }}固件编译成功！
