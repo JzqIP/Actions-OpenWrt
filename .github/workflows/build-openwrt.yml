@@ -104,7 +104,7 @@ jobs:
         source common/common.sh && Diy_all
         if [ ${{matrix.target}} != "openwrt" ]; then
           if [ "${REPO_URL}" == "https://github.com/coolsnowwolf/lede" ]; then
-            source common/common.sh && Diy_Lean
+            source common/common.sh && Diy_Lede
           elif [ "${REPO_URL}" == "https://github.com/Lienol/openwrt" ]; then
             source common/common.sh && Diy_lienol
           elif [ "${REPO_URL}" == "https://github.com/immortalwrt/immortalwrt" ]; then
