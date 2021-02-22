@@ -88,9 +88,10 @@ jobs:
         df -hT $PWD
         git clone -b $REPO_BRANCH --single-branch $REPO_URL openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        cd openwrt
         git clone https://github.com/gd0772/package package/diy
-        svn co https://github.com/mitvbox/Actions-OpenWrt/trunk/build/Custom ./openwrt/common
-        chmod +x openwrt/common/* ./
+        svn co https://github.com/mitvbox/Actions-OpenWrt/trunk/build/Custom common
+        chmod +x common/* ./
     
     - name: 公告内容
       run: |
