@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 # AutoUpdate for Openwrt
 
 Version=V5.0
