@@ -46,8 +46,6 @@ svn co https://github.com/gd0772/diy/trunk/public/luci-app-netdata ./package/lea
 svn co https://github.com/gd0772/diy/trunk/public/netdata ./feeds/packages/admin/netdata
 # echo '替换USB打印'
 svn co https://github.com/gd0772/diy/trunk/public/luci-app-usb-printer ./package/lean/luci-app-usb-printer
-# echo '添加 定时更新'
-svn co https://github.com/281677160/openwrt-package/trunk/luci-app-autoupdate package/diy/luci-app-autoupdate
 
 # echo '修改插件名称'
 sed -i 's/"管理权"/"改密码"/g' feeds/luci/modules/luci-base/po/zh-cn/base.po
