@@ -1,6 +1,5 @@
 ﻿#!/bin/bash
 # AutoUpdate for Openwrt
-# by gd772
 
 Version=V5.0
 
