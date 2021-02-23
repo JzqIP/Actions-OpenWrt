@@ -123,8 +123,8 @@ jobs:
         if [ "${REPO_URL}" == "https://github.com/coolsnowwolf/lede" ]; then
           source common/common.sh && Diy_lean2
           echo "NAME2=Lean-" >> $GITHUB_ENV
-          echo "Source=Lean" >> $GITHUB_ENV
-          echo "ZUOZHE=coolsnowwolf" >> $GITHUB_ENV
+          echo "Source=OpenWrt" >> $GITHUB_ENV
+          echo "ZUOZHE=lean" >> $GITHUB_ENV
         elif [ "${REPO_URL}" == "https://github.com/Lienol/openwrt" ]; then
           source common/common.sh && Diy_lienol2
           echo "NAME2=Lienol-" >> $GITHUB_ENV
