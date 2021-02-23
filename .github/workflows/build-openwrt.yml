@@ -250,7 +250,7 @@ jobs:
       id: organizer
       run: |
         cd openwrt
-        if [[ ${{matrix.target}} != "openwrt" ]]; then
+        if [[ ${{matrix.target}} != "gd772" ]]; then
           if [[ "${REGULAR_UPDATE}" == "true" ]]; then
             source common/upgrade.sh && Diy_Part3
           fi  
@@ -282,7 +282,7 @@ jobs:
       uses: actions/upload-artifact@v2
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
       with:
-        name: OpenWrt-${{ env.NAME2 }}${{ env.NAME1 }}-firmware-${{ env.date }}
+        name: OpenWrt-${{ env.NAME1 }}-firmware-${{ env.date }}
         path: ${{ env.FIRMWARE }}
 
     - name: 固件上传到「奶牛快传」「WeTransfer」
@@ -316,7 +316,9 @@ jobs:
         body: |
             ☆  源码 : ${{ env.REPO_URL }}
             ☆  分支 : ${{ env.REPO_BRANCH }}
-            ☆  感谢源码作者[ ${{ env.ZUOZHE }}大神 ]无私分享！
+            ☆  编译：gd772
+            ☆  默认IP：192.168.123.2   默认用户名：root   默认密码：password
+            ☆  自帮使用交流   TG群：http://t.me/joinchat/NQI2W1iXJuFaXWDRov-X1w
             
             🎉 [ ${{ env.NAME2 }}${{ env.NAME1 }} ]固件下载 ✨
             -
